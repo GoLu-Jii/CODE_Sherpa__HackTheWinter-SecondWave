@@ -8,7 +8,7 @@
 This document outlines:
 
 - What was **actually implemented and delivered in Round-1**
-- What will be **extended and improved in Round-2 (Final Round)**
+- What will be **extended and improved in Round-2**
 
 The intent is to clearly communicate execution progress and planned evolution, without overstating features or scope.
 
