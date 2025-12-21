@@ -70,7 +70,7 @@ Source code flows through ingestion, analysis, context grounding, and explanatio
 7.4 Integration: Communication between backend and interface<br>
 7.5 The architecture is tool-agnostic; technologies can be replaced without redesign.<br>
 
-8. Design Constraints:
+8. Design Constraints:<br>
 8.1 Limited language support in the initial version<br>
 8.2 Repository size constrained for hackathon feasibility<br>
 8.3 Static analysis only (no runtime execution)<br>
@@ -87,6 +87,7 @@ CODE_Sherpa addresses the challenge of understanding complex and unfamiliar code
 -> Deterministic preprocessing ensures reliability before invoking generative components.<br>
 -> This design improves clarity, maintainability, and extensibility of the system.<br>
 -> The solution remains practical within hackathon constraints while being scalable for real-world developer onboarding.<br>
+
 
 
 
