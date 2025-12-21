@@ -21,12 +21,13 @@ Displays interactive walkthroughs within the developer workflow.
 
 3. System Workflow(End to End workflow):
 
-3.1 Developer submits a source code repository
-3.2 Repository structure is ingested and normalized
-3.3 Static analysis extracts code structure and relationships
-3.4 Grounded context is constructed from analysis artifacts
-3.5 AI generates step-by-step explanations and guided tours
+3.1 Developer submits a source code repository<br>
+3.2 Repository structure is ingested and normalized<br>
+3.3 Static analysis extracts code structure and relationships<br>
+3.4 Grounded context is constructed from analysis artifacts<br>
+3.5 AI generates step-by-step explanations and guided tours<br>
 3.6 Results are presented through an interactive interface
+
 <img width="2124" height="4964" alt="system_workflow" src="https://github.com/user-attachments/assets/81f37f5c-5e69-4cd1-ac8c-d66bddf0392f" />
 
 4. Data Flow Diagrams (DFD):
@@ -74,6 +75,7 @@ CODE_Sherpa addresses the challenge of understanding complex and unfamiliar code
 -> Deterministic preprocessing ensures reliability before invoking generative components.
 -> This design improves clarity, maintainability, and extensibility of the system.
 -> The solution remains practical within hackathon constraints while being scalable for real-world developer onboarding.
+
 
 
 
