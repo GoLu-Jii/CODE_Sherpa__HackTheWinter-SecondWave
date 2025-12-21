@@ -3,7 +3,7 @@ CODE_Sherpa: An AI-Assisted System for Guided Codebase Understanding.
 1. Architectural Overview:
 CODE_Sherpa follows a modular, pipeline-oriented architecture that clearly separates deterministic code analysis from generative explanation logic. This separation ensures predictable behavior, improves explainability, and allows individual components to evolve independently. The system is designed with clear boundaries, controlled AI usage, and explicit data flow between stages.
 
-2. High-level architecture:
+2. High-level architecture:<br>
 
 The system consists of the following loosely coupled layers:
 2.1 Repository Ingestion:
@@ -75,6 +75,7 @@ CODE_Sherpa addresses the challenge of understanding complex and unfamiliar code
 -> Deterministic preprocessing ensures reliability before invoking generative components.
 -> This design improves clarity, maintainability, and extensibility of the system.
 -> The solution remains practical within hackathon constraints while being scalable for real-world developer onboarding.
+
 
 
 
