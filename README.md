@@ -7,15 +7,28 @@
 
 ## 📑 Table of Contents
 
-1. [Problem Statement](#problem-statement)
-2. [Background & Motivation](#background--motivation)
-3. [Research & Observations](#research--observations)
-4. [Proposed Solution](#proposed-solution)
-5. [Existing Approaches and Identified Gaps](#existing-approaches-and-identified-gaps)
-6. [Prototype Overview](#prototype-overview)
-7. [Conceptual Workflow](#conceptual-workflow)
-8. [System Overview](#system-overview)
-9. [How to Run the Prototype](#how-to-run-the-prototype)
+1. [Problem Statement](#problem-statement)  
+2. [Background & Motivation](#background--motivation)  
+3. [Research & Observations](#research--observations)  
+4. [Proposed Solution](#proposed-solution)  
+5. [Existing Approaches & Gaps](#existing-approaches--gaps)  
+6. [Prototype Overview](#prototype-overview)  
+7. [Conceptual Workflow](#conceptual-workflow)  
+8. [System Architecture & Pipeline](#system-architecture--pipeline)  
+9. [Round-1 Implementation Summary](#round-1-implementation-summary)  
+   - [Capabilities](#round-1-capabilities)  
+   - [Outputs](#round-1-outputs)  
+   - [Technical Approach](#round-1-technical-approach)  
+   - [Key Principle](#key-principle)  
+10. [How to Run the Prototype](#how-to-run-the-prototype)  
+    - [Prerequisites](#prerequisites)  
+    - [Quick Start](#quick-start)  
+    - [Output Files](#output-files)  
+    - [Viewing Results](#viewing-results)  
+    - [Expected Output](#expected-output)  
+    - [Troubleshooting](#troubleshooting)  
+    - [Testing Individual Components](#testing-individual-components)
+
 
 ---
 
@@ -127,6 +140,43 @@ The CODE Sherpa system operates as a guided learning pipeline that transforms a 
 6. **User Progression** – Developers move through the learning path at their own pace, building system-level understanding  
 
 This workflow emphasizes **structured comprehension** over ad-hoc exploration.
+
+---
+
+## Round-1 Implementation Summary
+
+For the first round of the hackathon, we implemented a **fully working end-to-end prototype** that demonstrates how a codebase can be automatically analyzed and explained using deterministic static analysis.
+
+### Round-1 Capabilities
+
+In Round-1, CODE Sherpa can:
+- Analyze a real repository to extract verified structural facts
+- Identify important files, functions, and call relationships
+- Convert this structure into a step-by-step guided explanation
+- Generate a flowchart that visually represents overall code flow and dependencies
+
+### Round-1 Outputs
+
+When executed, Round-1 produces:
+1. **`demo/analysis.json`** - Complete code structure analysis
+2. **`demo/learning_order.json`** - Structured learning path
+3. **`demo/flowchart.md`** - Visual dependency graph (Mermaid format)
+
+### Round-1 Technical Approach
+
+The Round-1 implementation prioritizes **correctness, clarity, and reproducibility**:
+- Uses Python's AST module for deterministic code parsing
+- Template-based explanations ensure accuracy
+- No external dependencies (pure Python standard library)
+- Reproducible results
+
+This establishes a strong and defensible technical foundation for further enhancements in Round-2.
+
+---
+
+### Key Principle
+
+**Intelligence is added only after correctness is guaranteed.** Round-1 validates the foundation; Round-2 enhances the experience.
 
 ---
 
