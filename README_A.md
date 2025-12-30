@@ -265,3 +265,5 @@ CODE_Sherpa addresses the challenge of understanding complex and unfamiliar code
 The architecture prioritizes **reliability and explainability** over pure automation. By grounding all AI-generated content in verified code structure, the system ensures that explanations are accurate, reproducible, and defensible. This approach transforms code comprehension from an ad-hoc activity into a structured, repeatable learning process.
 
 ---
+
+- [Round-2 Improvements README](README_B.md)
