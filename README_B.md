@@ -111,5 +111,3 @@ This ensures explanations remain accurate, reliable, and defensible.
 
 **Key Differentiator:**
 The progression demonstrates a principled approach: establish correctness first, then add intelligence carefully.
-
-## want to try if freeze works the way I expected
