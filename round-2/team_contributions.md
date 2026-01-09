@@ -80,24 +80,22 @@ or manage execution flow.
 
 ---
 
-## Member 4 — Integration & Judge Clarity Owner
+## Member 4 — CLI , Integration and Quality Controller
 
 ## Name - Raj Pratap
 
 **Owned areas**
-- Cross-component integration validation
-- Submission clarity and consistency
+- Member 4 owns the system integration layer, responsible for connecting all independently developed modules into a single     
+executable pipeline.
+
 
 **Owned files**
-- `round2/team_contributions.md`
-- `README.md` (Round-2 sections only)
+- `cli/main.py`
+- `requirements.txt`
 
 **Responsibility**
 
-Member 4 ensures that all components of CODE-Sherpa integrate coherently
-and that the submission is easy to review and difficult to misinterpret.
-This includes validating cross-document consistency, confirming ownership boundaries,
-and ensuring that the README accurately reflects implemented behavior.
-
-This role does not introduce new system behavior, redesign architecture,
-or define scalability strategies.
+Member 4 implemented the system integration layer during Round-1 by owning the CLI entry point
+that orchestrates the analyzer, tour generator, and flowchart generator as a single executable pipeline.
+This role ensured correct invocation order, path validation, and end-to-end execution consistency
+across components.
