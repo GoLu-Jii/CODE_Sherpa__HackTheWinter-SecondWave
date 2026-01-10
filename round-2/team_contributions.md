@@ -11,6 +11,7 @@ No member claims ownership outside the files listed below.
 ## Member 1 — Static Code Analyzer Engineer
  
 ## Name - Gaurav Joshi
+## GitHub: @Golu-Jii
 
 **Owned folders**
 - `analyzer/`
@@ -31,11 +32,16 @@ source of truth for all downstream components.
 This role explicitly excludes CLI orchestration, visualization, guided explanations,
 and any form of AI inference.
 
+### 🔮 Planned Goals: AI System Architecture
+* **Hybrid Graph-RAG Design:** Leading the architectural merge of Static AST data with Generative AI models. Responsible for defining how AST nodes are "tagged" for AI enrichment.
+* **Context Optimization:** Developing the "Context Pruning" logic to strip comments and whitespace from code before sending it to the AI, ensuring the system stays within token limits and budget.
+
 ---
 
 ## Member 2 — Guided Tour & Explanation Engineer
 
 ## Name - Parth Joshi
+## GitHub: @Parth-Jos-hi
 
 **Owned folders**
 - `tour/`
@@ -54,11 +60,16 @@ and generates structured explanation steps using predefined templates.
 This role does not perform static code parsing, dependency extraction,
 flowchart generation, or system orchestration.
 
+### 🔮 Planned Goals: "Sherpa Brain" (AI) Development
+* **Prompt Engineering Lead:** Designing the system prompts (e.g., "The Senior Architect Persona") that guide the AI to explain *why* code exists rather than just summarizing syntax.
+* **Semantic Injection:** Implementing the `sherpa_brain` module to dynamically insert AI-generated insights into the existing static tour templates.
+
 ---
 
 ## Member 3 — Flowchart & Visualization Engineer
 
 ## Name - Prateek Banoula
+## GitHub: @Prateekbanoula
 
 **Owned folders**
 - `flowchart/`
@@ -78,14 +89,19 @@ enabling repository-level comprehension without reading source code.
 This role does not parse source files, generate textual explanations,
 or manage execution flow.
 
+### 🔮 Planned Goals: VS Code Extension (UI & Frontend)
+* **Interactive Webviews:** Porting the static flowchart generation to dynamic VS Code Webviews, allowing diagrams to be zoomed and panned inside the IDE.
+* **Visual Navigation:** Designing the "Click-to-Code" interaction, where clicking a node in the flowchart instantly opens the corresponding file in the VS Code editor.
+
 ---
 
 ## Member 4 — CLI , Integration and Quality Controller
 
 ## Name - Raj Pratap
+## GitHub: @Raj-pratap07
 
 **Owned areas**
-- Member 4 owns the system integration layer, responsible for connecting all independently developed modules into a single     
+- Member 4 owns the system integration layer, responsible for connecting all independently developed modules into a single 
 executable pipeline.
 
 
@@ -99,3 +115,7 @@ Member 4 implemented the system integration layer during Round-1 by owning the C
 that orchestrates the analyzer, tour generator, and flowchart generator as a single executable pipeline.
 This role ensured correct invocation order, path validation, and end-to-end execution consistency
 across components.
+
+### 🔮 Planned Goals: VS Code Extension (Backend & Integration)
+* **Extension Host Orchestration:** Migrating the Python CLI logic into the VS Code Extension Host environment, ensuring the analysis runs smoothly as a background task.
+* **LSP Research:** Investigating the Language Server Protocol (LSP) to enable real-time analysis updates as the user types or modifies code in the editor.

@@ -29,19 +29,12 @@ No features or intelligence are implied beyond what is defined.
 
 ---
 
-### 1.2 Explicit Non-Goals
+### 1.2 Explicit Non-Goals & Constraints CODE-Sherpa does not:
 
-CODE-Sherpa does **not**:
-
-- Add intelligence or inference beyond code facts
-- Execute or trace code at runtime
-- Integrate with IDEs or editors
-- Modify source code
-- Learn from user behavior
-- Claim semantic or architectural intent
-
-The system prioritizes correctness, clarity, and determinism over breadth.
-
+- Allow AI to hallucinate code structure (AI is constrained by AST facts).
+- Execute code at runtime.
+- Modify source code.
+- Crucially: We do not use AI as an Architect, only as an Explainer. The AST is the Judge; the AI is the Narrator.
 ---
 
 ## 2. Architectural Principles
@@ -183,6 +176,18 @@ Downstream components do not re-analyze source code.
 
 - No inference beyond extracted facts
 - No architectural guessing
+
+---
+
+### 4.4.5 Semantic Enrichment Layer (The "Sherpa Brain")
+
+**Responsibility**: Enriches the static AST model with semantic context ("Why does this exist?").
+
+- Input: Verified AST Nodes + Raw Code Snippets.
+
+- Output: ai_annotations appended to the JSON model.
+
+- Constraints: Constrained to explain only the nodes provided by the Analyzer. Cannot invent new nodes.
 
 ---
 

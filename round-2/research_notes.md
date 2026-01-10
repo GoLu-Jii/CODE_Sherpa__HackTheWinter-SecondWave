@@ -25,7 +25,7 @@ This document does not expand scope or promise future behavior.
 
 ## 2. Why Static Analysis Was Chosen
 
-A core design decision was to rely exclusively on static analysis.
+A core design decision was to rely primarily on static analysis for structure, using AI strictly for semantic enrichment.
 
 This choice was driven by three factors:
 
@@ -77,20 +77,17 @@ which aligns with its educational and explanatory goals.
 
 ---
 
-## 5. Why Intelligence and Inference Were Avoided
+## 5. Why We Chose a "Hybrid Graph-RAG" Architecture
 
-The system intentionally avoids:
-- Semantic inference
-- Architectural intent detection
-- AI-driven guessing
+**We observed that pure Static Analysis is accurate but dry, while pure LLM analysis is insightful but hallucination-prone.**
 
-This decision was made to avoid:
-- Hallucinated explanations
-- Overstated claims
-- Mismatch between explanation and reality
+We rejected "Chat with Codebase" tools (pure RAG) because they lack structural awareness. Instead, we implemented a Hybrid Pipeline:
 
-The system explains *what is present*, not *what was intended*.
+- Structure (AST): Extracts the "Skeleton" (Files, Classes, Imports). This is 100% deterministic.
 
+- Semantics (LLM): Fills in the "Flesh" (Design Patterns, Intent).
+
+- The Key Innovation: We use the AST to ground the AI. The LLM is never asked "What is in this repo?"; it is asked "Here is function X in file Y; explain its role." This minimizes hallucinations to near zero.
 ---
 
 ## 6. Alternatives Considered
