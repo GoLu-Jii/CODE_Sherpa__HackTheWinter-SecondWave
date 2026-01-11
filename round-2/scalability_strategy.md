@@ -1,8 +1,13 @@
-# CODE-Sherpa — Scalability Strategy (Round 2 Architecture)
+# CODE-Sherpa — Scalability Strategy for Full Solution
 
-> **Authority Notice**
-> This document defines the scalability protocols for the Round 2 "Hybrid Graph-RAG" architecture.
-> It details how the system handles high concurrency and large repositories using the new Sherpa Brain layer.
+> **Planning Document Notice**
+> 
+> This document describes the **planned scalability strategy** for the complete CODE-Sherpa system,
+> including the proposed "Hybrid Graph-RAG" architecture with AI enrichment.
+> 
+> This is a planning document for Round-2 submission, describing how we plan to scale the system
+> beyond the Round-1 prototype. Current Round-1 implementation is a single-user CLI tool.
+> The strategies described here are planned for the full solution implementation.
 
 ---
 
@@ -44,22 +49,43 @@ For massive repositories, we do not analyze everything upfront.
 
 ## 3. Reliability & Failure Modes
 
-Static analysis inevitably encounters edge cases. CODE-Sherpa handles them explicitly to ensure robust scaling.
+Static analysis inevitably encounters edge cases. CODE-Sherpa plans to handle them explicitly
+to ensure robust scaling in the full solution.
 
-### 3.1 Syntax Errors & partial Parsing
+### 3.1 Syntax Errors & Partial Parsing
+
+**Current State (Round-1):**
+- AST parser silently handles parse errors (returns None for unparseable files)
+- System continues analysis of remaining files
+- No explicit error logging or user notification
+
+**Planned Enhancement (Full Solution):**
 * **Problem:** A repository contains invalid Python syntax (e.g., a file meant for Python 2 run in a Python 3 environment).
-* **Handling:** The AST parser wraps file operations in strict `try-except` blocks.
-* **Result:** The system logs the error, marks the specific file as "Unparseable," and continues analyzing the rest of the repository. The tour explicitly warns the user about the missing context.
+* **Planned Handling:** The AST parser will wrap file operations in strict `try-except` blocks with explicit error logging.
+* **Planned Result:** The system will log the error, mark the specific file as "Unparseable" in the knowledge model, and continue analyzing the rest of the repository. The tour will explicitly warn the user about missing context.
 
 ### 3.2 Circular Dependencies
+
+**Current State (Round-1):**
+- Dependency graph builder does not explicitly detect cycles
+- Graph representation may contain cycles without special marking
+
+**Planned Enhancement (Full Solution):**
 * **Problem:** File A imports B, which imports A. Naive recursion would crash the stack.
-* **Handling:** The graph builder maintains a `visited` set during traversal.
-* **Result:** Cycles are detected and "broken" visually in the flowchart (marked with a dashed line), preventing infinite loops.
+* **Planned Handling:** The graph builder will maintain a `visited` set during traversal to detect cycles.
+* **Planned Result:** Cycles will be detected and "broken" visually in the flowchart (marked with a dashed line), preventing infinite loops and clearly indicating circular dependencies to users.
 
 ### 3.3 Dynamic or Unresolvable Constructs
+
+**Current State (Round-1):**
+- System operates on "Best Effort" basis
+- Reports only statically visible information
+- Missing information is silently omitted (no explicit marking)
+
+**Planned Enhancement (Full Solution):**
 * **Problem:** Python code using `importlib` or dynamic `eval()` cannot be statically determined.
-* **Handling:** The system operates on a "Best Effort" basis. It reports only what is statically visible.
-* **Result:** Missing information is left unresolved rather than guessed (Zero Hallucination Policy).
+* **Planned Handling:** The system will continue to operate on a "Best Effort" basis, reporting only what is statically visible, but will explicitly mark unresolvable constructs in the knowledge model.
+* **Planned Result:** Missing information will be left unresolved rather than guessed (Zero Hallucination Policy). The UI will indicate which dependencies could not be resolved statically.
 
 ---
 
@@ -82,6 +108,27 @@ To maintain determinism and protect resources, we enforce the following hard lim
 ---
 
 ## 5. Summary of Scalability
-CODE-Sherpa scales because it is **lazy by default**. It calculates structure locally (cheap) and invokes intelligence remotely (expensive) only when necessary and unique.
 
-This architecture moves from a "Script" (Round 1) to a "Platform" (Round 2) capable of handling enterprise-grade loads.
+**Planned Scalability Approach:**
+
+CODE-Sherpa is designed to scale because it is **lazy by default**. It calculates structure locally (cheap)
+and invokes intelligence remotely (expensive) only when necessary and unique.
+
+**Current State (Round-1):**
+- Single-user CLI tool
+- Processes repositories sequentially
+- No caching or optimization
+- Suitable for personal use and small-to-medium repositories
+
+**Planned Full Solution:**
+- Multi-user support through VS Code Extension
+- Caching layer for AI responses (Redis)
+- Asynchronous processing for large repositories
+- Background task queues for scalable processing
+
+This planned architecture moves from a "Script" (Round-1) to a "Platform" (Full Solution) capable of handling enterprise-grade loads and multiple concurrent users.
+
+---
+
+**Note:** The scalability strategies described in this document are planning proposals for the full solution.
+The Round-1 prototype demonstrates the core functionality but does not include these scaling mechanisms.
