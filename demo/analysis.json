@@ -284,9 +284,9 @@
         "src/requests/cookies.py",
         "src/requests/exceptions.py",
         "src/requests/models.py",
-        "tests/compat.py",
-        "tests/test_structures.py",
-        "tests/utils.py"
+        "src/requests/structures.py",
+        "src/requests/utils.py",
+        "tests/compat.py"
       ]
     },
     "src/requests/api.py": {
@@ -467,8 +467,8 @@
       "depends_on": [
         "src/requests/_internal_utils.py",
         "src/requests/cookies.py",
-        "tests/compat.py",
-        "tests/utils.py"
+        "src/requests/utils.py",
+        "tests/compat.py"
       ]
     },
     "src/requests/certs.py": {
@@ -1201,11 +1201,11 @@
         "src/requests/auth.py",
         "src/requests/cookies.py",
         "src/requests/exceptions.py",
+        "src/requests/hooks.py",
         "src/requests/status_codes.py",
-        "tests/compat.py",
-        "tests/test_hooks.py",
-        "tests/test_structures.py",
-        "tests/utils.py"
+        "src/requests/structures.py",
+        "src/requests/utils.py",
+        "tests/compat.py"
       ]
     },
     "src/requests/packages.py": {
@@ -1461,16 +1461,16 @@
       },
       "depends_on": [
         "src/requests/_internal_utils.py",
-        "src/requests/adapters.py",
         "src/requests/auth.py",
         "src/requests/cookies.py",
         "src/requests/exceptions.py",
+        "src/requests/hooks.py",
         "src/requests/models.py",
         "src/requests/status_codes.py",
+        "src/requests/structures.py",
+        "src/requests/utils.py",
         "tests/compat.py",
-        "tests/test_hooks.py",
-        "tests/test_structures.py",
-        "tests/utils.py"
+        "tests/test_adapters.py"
       ]
     },
     "src/requests/status_codes.py": {
@@ -1497,7 +1497,7 @@
         }
       },
       "depends_on": [
-        "tests/test_structures.py"
+        "src/requests/structures.py"
       ]
     },
     "src/requests/structures.py": {
@@ -1918,8 +1918,8 @@
         "src/requests/_internal_utils.py",
         "src/requests/cookies.py",
         "src/requests/exceptions.py",
-        "tests/compat.py",
-        "tests/test_structures.py"
+        "src/requests/structures.py",
+        "tests/compat.py"
       ]
     },
     "tests/__init__.py": {
@@ -2263,8 +2263,8 @@
         }
       },
       "depends_on": [
-        "tests/testserver/server.py",
-        "tests/utils.py"
+        "src/requests/utils.py",
+        "tests/testserver/server.py"
       ]
     },
     "tests/test_packages.py": {
@@ -4292,8 +4292,8 @@
         }
       },
       "depends_on": [
-        "tests/compat.py",
-        "tests/utils.py"
+        "src/requests/utils.py",
+        "tests/compat.py"
       ]
     },
     "tests/test_structures.py": {
