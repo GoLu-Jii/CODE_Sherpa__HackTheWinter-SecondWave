@@ -149,7 +149,13 @@ This approach emphasizes **structured comprehension** over ad-hoc exploration or
 ### Prerequisites
 
 - **Python 3.7 or higher** (Python 3.12+ recommended)
-- No external dependencies required — uses only Python standard library
+- **Install dependency:** `requests`
+  ```bash
+  pip install requests
+  ```
+- **Optional (for semantic enrichment):**
+  - Set `GROQ_API_KEY` in your environment (enables LLM-backed explanations)
+  - Internet access (enrichment calls the Groq API)
 - **Language Support:** The prototype currently supports **Python repositories only**. It analyzes `.py` files and uses Python's AST (Abstract Syntax Tree) for code analysis.
 
 Verify your Python version:
@@ -164,7 +170,22 @@ python --version
    cd CODE_Sherpa__HackTheWinter-SecondWave
    ```
 
-2. **Run the analyzer on a repository:**
+2. **Install `requests` (if not already installed):**
+   ```bash
+   pip install requests
+   ```
+
+3. **(Optional) Enable semantic enrichment via Groq:**
+   ```powershell
+   # Windows PowerShell
+   $env:GROQ_API_KEY="your_api_key_here"
+   ```
+   ```bash
+   # Linux / Mac
+   export GROQ_API_KEY="your_api_key_here"
+   ```
+
+4. **Run the pipeline on a repository:**
    ```bash
    python cli/main.py analyze <repository_path>
    ```
@@ -189,6 +210,11 @@ After running, the following files will be generated in the `demo/` folder:
   - Function definitions and call relationships
   - Import statements
 
+- **`demo/enriched_analysis.json`** — Enriched analysis (if enrichment succeeds) including:
+  - File-level explanations
+  - Function-level explanations
+  - Structure-preserving, additive metadata only
+
 - **`demo/learning_order.json`** — Structured learning path with:
   - Ordered list of files to explore
   - Function-level guidance
@@ -207,6 +233,11 @@ Get-Content demo/analysis.json
 
 # Windows CMD / Linux / Mac
 type demo/analysis.json
+```
+
+**View the enriched analysis (if present):**
+```bash
+Get-Content demo/enriched_analysis.json
 ```
 
 **View the learning order:**
@@ -228,14 +259,21 @@ When you run the command, you should see:
 Running static analysis...
 Analysis completed
 
-Generating guided tour...
+Running semantic enrichment...
+Enrichment completed
+
+Generating tour...
 Tour generated
 
-Generating repository flowchart...
+Generating flowchart...
 Flowchart exported
 
-CODE_Sherpa pipeline completed successfully
+Pipeline completed successfully
 ```
+
+**Notes:**
+- If `GROQ_API_KEY` is **set**, enrichment will attempt to use the Groq API for explanations.
+- If `GROQ_API_KEY` is **not set** (or enrichment fails), the pipeline **falls back automatically** and continues using `analysis.json`.
 
 ### Troubleshooting
 
@@ -252,9 +290,15 @@ python cli/main.py analyze sample_repo
 - Ensure the path exists and contains Python files (`.py` extension)
 - **Note:** Only Python repositories are currently supported
 
+**`ModuleNotFoundError: No module named 'requests'`:**
+- Install the dependency:
+  ```bash
+  pip install requests
+  ```
+
 **Module not found errors:**
 - Ensure you're running from the project root directory
-- Verify all folders (`analyzer/`, `cli/`, `tour/`, `flowchart/`) exist
+- Verify all folders (`analyzer/`, `cli/`, `tour/`, `flowchart/`, `enrich/`) exist
 
 ### Testing Individual Components
 

@@ -1,26 +1,14 @@
-# CODE_Sherpa Requirements
 #
-# This project uses only Python standard library modules.
-# No external packages need to be installed.
+# CODE_Sherpa Requirements
 #
 # Python Version: 3.7 or higher required
 #
-# Standard library modules used:
-#   - ast          (Abstract Syntax Tree parsing)
-#   - json         (JSON serialization)
-#   - os           (Operating system interface)
-#   - pathlib      (Object-oriented filesystem paths)
-#   - subprocess   (Subprocess management)
-#   - sys          (System-specific parameters)
-#   - typing       (Type hints: Dict, List, Set, Optional, Any)
-#   - traceback    (Error stack traces)
+# External dependency:
+# - requests: used by enrich/enrich.py to call the Groq API when GROQ_API_KEY is set
 #
-# Installation:
-#   No installation needed! Just ensure you have Python 3.7+
+# Install:
+#   pip install -r requirements.txt
 #
-# Verify Python version:
-#   python --version
-#
-# Usage:
-#   python cli/main.py analyze <repository_path>
+requests
+
 

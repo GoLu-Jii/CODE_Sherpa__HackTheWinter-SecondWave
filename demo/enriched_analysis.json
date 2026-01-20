@@ -124,7 +124,7 @@
         }
       },
       "depends_on": [
-        "tests/compat.py"
+        "src/requests/compat.py"
       ],
       "path": "src/requests/_internal_utils.py",
       "explanation": "This file defines logic in `src/requests/_internal_utils.py`."
@@ -334,13 +334,13 @@
         }
       },
       "depends_on": [
+        "src/requests/_internal_utils.py",
         "src/requests/auth.py",
+        "src/requests/compat.py",
         "src/requests/cookies.py",
         "src/requests/exceptions.py",
         "src/requests/models.py",
-        "tests/compat.py",
-        "tests/test_structures.py",
-        "tests/utils.py"
+        "src/requests/structures.py"
       ],
       "path": "src/requests/adapters.py",
       "explanation": "This file defines logic in `src/requests/adapters.py`."
@@ -566,9 +566,8 @@
       },
       "depends_on": [
         "src/requests/_internal_utils.py",
-        "src/requests/cookies.py",
-        "tests/compat.py",
-        "tests/utils.py"
+        "src/requests/compat.py",
+        "src/requests/cookies.py"
       ],
       "path": "src/requests/auth.py",
       "explanation": "This file defines logic in `src/requests/auth.py`."
@@ -1007,7 +1006,7 @@
       },
       "depends_on": [
         "src/requests/_internal_utils.py",
-        "tests/compat.py"
+        "src/requests/compat.py"
       ],
       "path": "src/requests/cookies.py",
       "explanation": "This file defines logic in `src/requests/cookies.py`."
@@ -1035,7 +1034,7 @@
         }
       },
       "depends_on": [
-        "tests/compat.py"
+        "src/requests/compat.py"
       ],
       "path": "src/requests/exceptions.py",
       "explanation": "This file defines logic in `src/requests/exceptions.py`."
@@ -1503,13 +1502,12 @@
       "depends_on": [
         "src/requests/_internal_utils.py",
         "src/requests/auth.py",
+        "src/requests/compat.py",
         "src/requests/cookies.py",
         "src/requests/exceptions.py",
         "src/requests/status_codes.py",
-        "tests/compat.py",
-        "tests/test_hooks.py",
-        "tests/test_structures.py",
-        "tests/utils.py"
+        "src/requests/structures.py",
+        "tests/test_hooks.py"
       ],
       "path": "src/requests/models.py",
       "explanation": "This file defines logic in `src/requests/models.py`."
@@ -1522,7 +1520,7 @@
       ],
       "functions": {},
       "depends_on": [
-        "tests/compat.py"
+        "src/requests/compat.py"
       ],
       "path": "src/requests/packages.py",
       "explanation": "This file defines logic in `src/requests/packages.py`."
@@ -1825,16 +1823,15 @@
       },
       "depends_on": [
         "src/requests/_internal_utils.py",
-        "src/requests/adapters.py",
         "src/requests/auth.py",
+        "src/requests/compat.py",
         "src/requests/cookies.py",
         "src/requests/exceptions.py",
         "src/requests/models.py",
         "src/requests/status_codes.py",
-        "tests/compat.py",
-        "tests/test_hooks.py",
-        "tests/test_structures.py",
-        "tests/utils.py"
+        "src/requests/structures.py",
+        "tests/test_adapters.py",
+        "tests/test_hooks.py"
       ],
       "path": "src/requests/sessions.py",
       "explanation": "This file defines logic in `src/requests/sessions.py`."
@@ -1867,7 +1864,7 @@
         }
       },
       "depends_on": [
-        "tests/test_structures.py"
+        "src/requests/structures.py"
       ],
       "path": "src/requests/status_codes.py",
       "explanation": "This file defines logic in `src/requests/status_codes.py`."
@@ -1961,7 +1958,7 @@
         }
       },
       "depends_on": [
-        "tests/compat.py"
+        "src/requests/compat.py"
       ],
       "path": "src/requests/structures.py",
       "explanation": "This file defines logic in `src/requests/structures.py`."
@@ -2398,10 +2395,10 @@
       "depends_on": [
         "src/requests/__version__.py",
         "src/requests/_internal_utils.py",
+        "src/requests/compat.py",
         "src/requests/cookies.py",
         "src/requests/exceptions.py",
-        "tests/compat.py",
-        "tests/test_structures.py"
+        "src/requests/structures.py"
       ],
       "path": "src/requests/utils.py",
       "explanation": "This file defines logic in `src/requests/utils.py`."
@@ -2827,8 +2824,8 @@
         }
       },
       "depends_on": [
-        "tests/testserver/server.py",
-        "tests/utils.py"
+        "src/requests/_internal_utils.py",
+        "tests/testserver/server.py"
       ],
       "path": "tests/test_lowlevel.py",
       "explanation": "This file defines logic in `tests/test_lowlevel.py`."
@@ -5376,8 +5373,8 @@
         }
       },
       "depends_on": [
-        "tests/compat.py",
-        "tests/utils.py"
+        "src/requests/_internal_utils.py",
+        "src/requests/compat.py"
       ],
       "path": "tests/test_requests.py",
       "explanation": "This file defines logic in `tests/test_requests.py`."
@@ -6159,7 +6156,7 @@
         }
       },
       "depends_on": [
-        "tests/compat.py"
+        "src/requests/compat.py"
       ],
       "path": "tests/test_utils.py",
       "explanation": "This file defines logic in `tests/test_utils.py`."
