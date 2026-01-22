@@ -244,3 +244,63 @@ def _call_llm(prompt: str) -> str:
 
     response.raise_for_status()
     return response.json()["choices"][0]["message"]["content"].strip()
+
+
+# -------------------------
+# Annotation Generation (New Sidecar Flow)
+# -------------------------
+
+def generate_annotations(analysis: Dict[str, Any], use_llm: bool = True) -> Dict[str, Any]:
+    """
+    Generate a sidecar explanations file (annotations.json).
+    
+    Structure:
+    {
+        "files": {
+            "path/to/file.py": "Explanation...",
+        },
+        "functions": {
+            "path/to/file.py::func_name": "Explanation...",
+        }
+    }
+    """
+    annotations = {
+        "files": {},
+        "functions": {}
+    }
+    
+    files = analysis.get("files", {})
+    
+    for file_path, file_node in files.items():
+        # Temporarily inject path for helper
+        file_node_copy = file_node.copy()
+        file_node_copy["path"] = file_path
+        
+        # Explain file
+        explanation = _explain_file(file_node_copy, use_llm)
+        annotations["files"][file_path] = explanation
+        
+        # Explain functions
+        functions = file_node.get("functions", {})
+        for func_name, func_node in functions.items():
+            func_node_copy = func_node.copy()
+            func_node_copy["name"] = func_name
+            
+            # Key format: file_path::func_name
+            key = f"{file_path}::{func_name}"
+            annotations["functions"][key] = _explain_function(func_node_copy, file_node_copy, use_llm)
+            
+    return annotations
+
+
+def run_enrichment_generation(input_path: str, output_path: str, use_llm: bool = True) -> None:
+    """
+    Generate independent annotations.json from analysis.json.
+    """
+    with open(input_path, "r", encoding="utf-8") as f:
+        analysis = json.load(f)
+
+    annotations = generate_annotations(analysis, use_llm=use_llm)
+
+    with open(output_path, "w", encoding="utf-8") as f:
+        json.dump(annotations, f, indent=2)

@@ -84,14 +84,16 @@ We are building a platform where **trust is the feature**. Our design goals are:
 
 ## System Overview
 
-The CODE Sherpa system operates as a **deterministic pipeline**:
+The CODE Sherpa system operates as a **deterministic pipeline** with an **optional enrichment sidecar**:
 
-1.  **Repository Analysis**: The codebase is analyzed using static analysis to extract verified structural facts.
-2.  **Canonical Modeling**: These facts form a graph database of the code—the "Canonical Code Knowledge Model."
-3.  **Enrichment & Presentation**: This model is enriched with semantic explanations and served via API to the Web Platform, IDEs, and other agents.
+1.  **Repository Analysis**: The codebase is analyzed using static analysis to extract verified structural facts (AST-based).
+2.  **Canonical Modeling**: These facts form the "Unified Model" (`analysis.json`), which serves as the single source of truth.
+3.  **Parallel Generation**:
+    *   **Learning Path**: A guided tour is generated directly from the verified model.
+    *   **Visualization**: A flowchart is generated directly from the verified model.
+4.  **Semantic Enrichment (Optional)**: An AI layer runs *independently* to generate a sidecar file (`annotations.json`) providing natural language explanations.
 
-This approach emphasizes **structured comprehension** over ad-hoc exploration.
-
+This approach ensures the critical path is **fast, deterministic, and offline-capable**, while AI insights are treated as an additive layer context.
 
 ---
 
@@ -104,12 +106,12 @@ While our vision is a hosted platform, the **current implementation (Round-2)** 
 **Capabilities:**
 *   **Language Support:** Python (`.py` files) via AST analysis.
 *   **Analysis:** Extracts files, functions, imports, and call graphs.
-*   **Enrichment:** Optional integration with Groq API for AI explanations.
+*   **Enrichment:** Optional integration with Groq API for AI explanations (sidecar mode).
 *   **Outputs:**
     *   `analysis.json`: Raw structural data.
     *   `learning_order.json`: A proposed guided tour path.
     *   `flowchart.md`: Mermaid diagram of file dependencies.
-    *   `demo/`: All artifacts are generated into a local demo folder.
+    *   `annotations.json`: Sidecar file with AI explanations (if enabled).
 
 This prototype validates the **Deterministic Engine** core of the architecture.
 
@@ -171,25 +173,10 @@ python --version
 
 After running, the following files will be generated in the `demo/` folder:
 
-- **`demo/analysis.json`** — Complete code analysis including:
-  - Entry point detection
-  - File-level dependencies
-  - Function definitions and call relationships
-  - Import statements
-
-- **`demo/enriched_analysis.json`** — Enriched analysis (if enrichment succeeds) including:
-  - File-level explanations
-  - Function-level explanations
-  - Structure-preserving, additive metadata only
-
-- **`demo/learning_order.json`** — Structured learning path with:
-  - Ordered list of files to explore
-  - Function-level guidance
-  - Entry point identification
-
-- **`demo/flowchart.md`** — Visual dependency graph in Mermaid format showing:
-  - File-to-file dependencies
-  - Code flow visualization
+- **`demo/analysis.json`** — Complete code analysis including entry points, dependencies, and call graphs. **(Single Source of Truth)**
+- **`demo/learning_order.json`** — Structured learning path generated from the analysis.
+- **`demo/flowchart.md`** — specific visual dependency graph in Mermaid format.
+- **`demo/annotations.json`** — **(Optional)** Sidecar file containing AI-generated explanations for files and functions. Only generated if `GROQ_API_KEY` is present.
 
 ### Viewing Results
 
@@ -202,11 +189,6 @@ Get-Content demo/analysis.json
 type demo/analysis.json
 ```
 
-**View the enriched analysis (if present):**
-```bash
-Get-Content demo/enriched_analysis.json
-```
-
 **View the learning order:**
 ```bash
 Get-Content demo/learning_order.json
@@ -215,6 +197,11 @@ Get-Content demo/learning_order.json
 **View the flowchart:**
 ```bash
 Get-Content demo/flowchart.md
+```
+
+**View the AI annotations (if enabled):**
+```bash
+Get-Content demo/annotations.json
 ```
 
 The flowchart can be visualized using any Mermaid-compatible viewer (e.g., GitHub, VS Code with Mermaid extension, or online Mermaid editors).
@@ -226,21 +213,21 @@ When you run the command, you should see:
 Running static analysis...
 Analysis completed
 
-Running semantic enrichment...
-Enrichment completed
-
 Generating tour...
 Tour generated
 
 Generating flowchart...
 Flowchart exported
 
+Running semantic enrichment...
+Enrichment completed (annotations.json created)
+
 Pipeline completed successfully
 ```
 
 **Notes:**
-- If `GROQ_API_KEY` is **set**, enrichment will attempt to use the Groq API for explanations.
-- If `GROQ_API_KEY` is **not set** (or enrichment fails), the pipeline **falls back automatically** and continues using `analysis.json`.
+- **Performance**: Tour and Flowchart generation are now practically instant as they don't wait for the AI.
+- **Resilience**: If Enrichment fails or is skipped, the rest of the pipeline functions normally.
 
 ### Troubleshooting
 
@@ -286,23 +273,17 @@ python tour/tour_builder.py demo/analysis.json
 python flowchart/flow_builder.py demo/analysis.json
 ```
 
-**Test explainer:**
-```bash
-python tour/explainer.py demo/analysis.json demo/learning_order.json
-```
-
-- [Execution Flow Diagram](Plannings/diagrams/execution_flow.png)
-- [Syatem Architecture Diagram](Plannings/diagrams/system_architecture.png)
-
 ---
 
 
 ## System Architecture
 
-CODE-Sherpa is designed as a deterministic, static-analysis–driven system
-for understanding codebases through verified structure rather than inference.
+CODE-Sherpa is designed as a **deterministic, static-analysis–driven system** that prioritizes speed and structural truth.
 
-The system is organized as a linear pipeline:
-source code is statically analyzed into a unified JSON knowledge model,
-which is then consumed by independent generators to produce
-guided explanations and repository-level flowcharts.
+The system is organized as a decoupled pipeline:
+
+1.  **Core Analysis**: Source code -> `analysis.json` (Unified Model).
+2.  **Derived Views**: `analysis.json` -> Tour & Flowchart (Deterministic, Fast).
+3.  **Optional Context**: `analysis.json` + AI -> `annotations.json` (Semantic Sidecar).
+
+This architecture allows the system to provide immediate value (structure, maps, learning order) even without an internet connection or API keys, while "lighting up" with AI explanations when available.
