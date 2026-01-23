@@ -110,7 +110,7 @@ This approach ensures the critical path is **fast, deterministic, and offline-ca
 
 ### Current Prototype Status
 
-While our vision is a hosted platform, the **current implementation (Round-2)** is a functional **local CLI tool** serving as the foundational engine.
+While our vision is a hosted platform, the **current implementation ** is a functional **local CLI tool** serving as the foundational engine.
 
 **Capabilities:**
 *   **Language Support:** Python (`.py` files) via AST analysis.
